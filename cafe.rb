@@ -1,3 +1,4 @@
+# ! /usr/bin/env ruby
 # frozen_string_literal: true
 
 DRINKS = [
@@ -20,15 +21,18 @@ def take_order(menus)
   end
   print '>'
   order_number = gets.to_i
-  puts "#{menus[order_number][:name]}(#{menus[order_number][:price]}円)ですね。"
-  order_number
+  return if order_number.zero?
+
+  puts "#{menus[order_number - 1][:name]}(#{menus[order_number - 1][:price]}円)ですね。"
+  menus[order_number - 1][:price]
 end
 
 puts 'bugカフェへようこそ！ご注文は？ 番号でどうぞ'
-order1 = take_order(DRINKS)
+price1 = take_order(DRINKS).to_i
 
 puts 'フードメニューはいかがですか?'
-order2 = take_order(FOODS)
+price2 = take_order(FOODS).to_i
 
-total = FOODS[order1][:price] + DRINKS[order2][:price]
-puts "お会計は#{total}円になります。ありがとうございました！"
+total = price1 + price2
+puts "お会計は#{total}円になります。" unless total.zero?
+puts 'ありがとうございました！'
