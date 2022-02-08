@@ -15,13 +15,10 @@ FOODS = [
   { name: 'ホットサンド', price: '410' }
 ].freeze
 
-def show_menus(menus)
+def take_order(menus)
   menus.each.with_index(1) do |menu, i|
     puts "(#{i})#{menu[:name]}: #{menu[:price]}円"
   end
-end
-
-def take_order(menus)
   print '>'
   order_number = gets.to_i
   return if order_number.zero?
@@ -31,11 +28,9 @@ def take_order(menus)
 end
 
 puts 'bugカフェへようこそ！ご注文は？ 番号でどうぞ'
-show_menus(DRINKS)
 price1 = take_order(DRINKS).to_i
 
 puts 'フードメニューはいかがですか?'
-show_menus(FOODS)
 price2 = take_order(FOODS).to_i
 
 total = price1 + price2
